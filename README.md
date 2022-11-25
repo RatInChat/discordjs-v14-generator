@@ -1,10 +1,15 @@
 # discordjs-v14-generator
-A discord.js v14 code generator. (I was getting lazy ok???)
-
+## A discord.js v14 code generator. (I was getting lazy ok???)
+### Made By RatInChat  
+  
+**Install the cli**
+```
+npm i gen-djs
+```
 
 **Arguments**
 ```
-dgenerator --name=index.js --i=true --token=dotenv --g=true
+gen-djs --name=index.js --i=true --token=dotenv --g=true
 ```
 
 **--name** \
