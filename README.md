@@ -4,7 +4,7 @@ A discord.js v14 code generator. (I was getting lazy ok???)
 
 **Arguments**
 ```
-generate14 --name=index.js --i=true --token=dotenv --g=true
+dgenerator --name=index.js --i=true --token=dotenv --g=true
 ```
 
 **--name** \
