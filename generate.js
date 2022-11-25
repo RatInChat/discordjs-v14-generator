@@ -22,7 +22,14 @@ ${tokenType === 'dotenv' ? 'require(\'dotenv\').config();' : 'const config = req
 const token = ${tokenType === 'dotenv' ? 'process.env.TOKEN' : 'config.token'};
 const { Collection } = require('discord.js')
 // change these intents to your needs
-const client = new Client({ intents: [GatewayIntentBits.GUILDS, GatewayIntentBits.GUILD_MESSAGES] });
+const client = new Client({
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,
+	],
+});
 client.commands = new Collection();
 
 client.on('ready', async () => {
@@ -155,17 +162,32 @@ node_modules
 .env
 config.json
 `
+let pongCommand = `
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('ping')
+		.setDescription('Replies with Pong!'),
+	async execute(interaction) {
+		await interaction.reply('Pong!');
+	},
+};
+
+`
 // create a folder called event and create a file called interactionCreate.js
 try {
     if (!fs.existsSync('./events')) {
       fs.mkdirSync('./events');
-    } else if (!fs.existsSync('./commands')) {
+    } 
+	if (!fs.existsSync('./commands')) {
       fs.mkdirSync('./commands');
     }
   } catch (err) {
     console.error(err);
   }
 fs.writeFileSync('./events/interactionCreate.js', eventInteractionCreate);
+fs.writeFileSync('./commands/ping.js', pongCommand);
 fs.writeFileSync(`${fileName}.js`, fileContent);
 fs.writeFileSync('slash.js', slashCommandDeploy);
 fs.writeFileSync('package.json', packageJson);
@@ -186,7 +208,14 @@ const { Client, GatewayIntentBits } = require('discord.js');
 ${tokenType === 'dotenv' ? 'require(\'dotenv\').config();' : 'const config = require(\'./config.json\');'}
 const token = ${tokenType === 'dotenv' ? 'process.env.TOKEN' : 'config.token'};
 // change these intents to your needs
-const client = new Client({ intents: [GatewayIntentBits.GUILDS, GatewayIntentBits.GUILD_MESSAGES] });
+const client = new Client({
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,
+	],
+});
 
 client.on('ready', async () => {
 	console.log(\`Logged in as \${client.user.tag}!\`);
