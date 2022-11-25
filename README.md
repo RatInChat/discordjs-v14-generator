@@ -4,7 +4,7 @@
   
 **Install the cli**
 ```
-npm i gen-djs
+npm i gen-djs -g
 ```
 
 **Arguments**
