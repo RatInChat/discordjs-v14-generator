@@ -19,7 +19,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, GatewayIntentBits } = require('discord.js');
 ${tokenType === 'dotenv' ? 'require(\'dotenv\').config();' : 'const config = require(\'./config.json\');'}
-const token = ${tokenType === 'dotenv' ? 'process.env' : 'config.token'};
+const token = ${tokenType === 'dotenv' ? 'process.env.TOKEN' : 'config.token'};
 const { Collection } = require('discord.js')
 // change these intents to your needs
 const client = new Client({ intents: [GatewayIntentBits.GUILDS, GatewayIntentBits.GUILD_MESSAGES] });
@@ -184,7 +184,7 @@ console.log('Also make sure to add your token to the .env file or config.json fi
 const fileContent = `
 const { Client, GatewayIntentBits } = require('discord.js');
 ${tokenType === 'dotenv' ? 'require(\'dotenv\').config();' : 'const config = require(\'./config.json\');'}
-const token = ${tokenType === 'dotenv' ? 'process.env' : 'config.token'};
+const token = ${tokenType === 'dotenv' ? 'process.env.TOKEN' : 'config.token'};
 // change these intents to your needs
 const client = new Client({ intents: [GatewayIntentBits.GUILDS, GatewayIntentBits.GUILD_MESSAGES] });
 
