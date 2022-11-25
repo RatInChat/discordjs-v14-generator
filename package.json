@@ -1,5 +1,5 @@
 {
-  "name": "discord.js-v14-generator",
+  "name": "dgenerator",
   "version": "1.0.0",
   "description": "",
   "main": "generate.js",
@@ -9,6 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bin": "./generate.js",
   "dependencies": {
     "yargs": "^17.6.2"
   }
