@@ -1,13 +1,61 @@
 #!/usr/bin/env node
-const yargs = require('yargs/yargs');
-const { hideBin } = require('yargs/helpers');
-const argv = yargs(hideBin(process.argv)).argv;
-const fs = require('fs');
+import fs from 'node:fs';
+import inquirer from 'inquirer';
+let name;
+let i;
+let token;
+let g;
+
+await inquirer
+  .prompt([
+	{
+    name: 'file',
+	message: 'What is the name of the main bot file?',
+	default: 'index.js',
+	type: 'input'
+	},
+	{
+		name: 'i',
+		message: 'Would you like to include interaction and event handlers?',
+		default: 'yes',
+		type: 'confirm'
+	},
+	{
+		name: 'token',
+		message: 'What type of token imports would you like to use?',
+		default: 'dotenv',
+		type: 'list',
+		choices: ['dotenv', 'config.json']
+	},
+	{
+		name: 'g',
+		message: 'Would you like to include a gitignore file?',
+		default: 'yes',
+		type: 'confirm'
+	}
+
+])
+  .then((answers) => {
+	name = answers.file;
+	i = answers.i;
+	token = answers.token;
+	g = answers.g;
+  })
+  .catch((error) => {
+    if (error.isTtyError) {
+      // Prompt couldn't be rendered in the current environment
+		console.log('Prompt couldn\'t be rendered in the current environment');
+    } else {
+      // Something else went wrong
+		console.log('Something went wrong');
+		console.log(error);
+    }
+  });
+
 let tokenType;
-const { name, i, token, g } = argv;
 if (token == 'dotenv') {
     tokenType = 'dotenv';
-} else if (token == 'config') {
+} else if (token == 'config.json') {
     tokenType = 'config';
 } else {
 	tokenType = 'dotenv';
@@ -163,7 +211,7 @@ node_modules
 config.json
 `
 let pongCommand = `
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
